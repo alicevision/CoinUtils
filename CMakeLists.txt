@@ -56,10 +56,160 @@ if(NOT HAVE_CMATH OR NOT HAVE_CFLOAT)
     message(FATAL_ERROR "Missing necessary include files, like cmath or cfloat")
 endif()
 
-file(GLOB UTILS_SOURCES
-          src/*.hpp
-          src/*.cpp
-          src/*.h)
+set(UTILS_SOURCES
+    src/CoinAdjacencyVector.cpp
+    src/CoinAlloc.cpp
+    src/CoinBronKerbosch.cpp
+    src/CoinBuild.cpp
+    src/CoinCliqueExtender.cpp
+    src/CoinCliqueList.cpp
+    src/CoinCliqueSet.cpp
+    src/CoinConflictGraph.cpp
+    src/CoinCutPool.cpp
+    src/CoinDenseFactorization.cpp
+    src/CoinDenseVector.cpp
+    src/CoinDynamicConflictGraph.cpp
+    src/CoinError.cpp
+    src/CoinFactorization1.cpp
+    src/CoinFactorization2.cpp
+    src/CoinFactorization3.cpp
+    src/CoinFactorization4.cpp
+    src/CoinFileIO.cpp
+    src/CoinFinite.cpp
+    src/CoinIndexedVector.cpp
+    src/CoinLpIO.cpp
+    src/CoinMessage.cpp
+    src/CoinMessageHandler.cpp
+    src/CoinModel.cpp
+    src/CoinModelUseful2.cpp
+    src/CoinModelUseful.cpp
+    src/CoinMpsIO.cpp
+    src/CoinNodeHeap.cpp
+    src/CoinOddWheelSeparator.cpp
+    src/CoinOslFactorization2.cpp
+    src/CoinOslFactorization3.cpp
+    src/CoinOslFactorization.cpp
+    src/CoinPackedMatrix.cpp
+    src/CoinPackedVectorBase.cpp
+    src/CoinPackedVector.cpp
+    src/CoinParam.cpp
+    src/CoinParamUtils.cpp
+    src/CoinPostsolveMatrix.cpp
+    src/CoinPrePostsolveMatrix.cpp
+    src/CoinPresolveDoubleton.cpp
+    src/CoinPresolveDual.cpp
+    src/CoinPresolveDupcol.cpp
+    src/CoinPresolveEmpty.cpp
+    src/CoinPresolveFixed.cpp
+    src/CoinPresolveForcing.cpp
+    src/CoinPresolveHelperFunctions.cpp
+    src/CoinPresolveImpliedFree.cpp
+    src/CoinPresolveIsolated.cpp
+    src/CoinPresolveMatrix.cpp
+    src/CoinPresolveMonitor.cpp
+    src/CoinPresolvePsdebug.cpp
+    src/CoinPresolveSingleton.cpp
+    src/CoinPresolveSubst.cpp
+    src/CoinPresolveTighten.cpp
+    src/CoinPresolveTripleton.cpp
+    src/CoinPresolveUseless.cpp
+    src/CoinPresolveZeros.cpp
+    src/CoinRational.cpp
+    src/CoinSearchTree.cpp
+    src/CoinShallowPackedVector.cpp
+    src/CoinShortestPath.cpp
+    src/CoinSimpFactorization.cpp
+    src/CoinSnapshot.cpp
+    src/CoinStaticConflictGraph.cpp
+    src/CoinStructuredModel.cpp
+    src/CoinWarmStartBasis.cpp
+    src/CoinWarmStartDual.cpp
+    src/CoinWarmStartPrimalDual.cpp
+    src/CoinWarmStartVector.cpp
+)
+
+set(UTILS_HEADERS
+    src/CoinAdjacencyVector.hpp
+    src/CoinAlloc.hpp
+    src/CoinBronKerbosch.hpp
+    src/CoinBuild.hpp
+    src/CoinCliqueExtender.hpp
+    src/CoinCliqueList.hpp
+    src/CoinCliqueSet.hpp
+    src/CoinConflictGraph.hpp
+    src/CoinCutPool.hpp
+    src/CoinDenseFactorization.hpp
+    src/CoinDenseVector.hpp
+    src/CoinDistance.hpp
+    src/CoinDynamicConflictGraph.hpp
+    src/CoinError.hpp
+    src/CoinFactorization.hpp
+    src/CoinFileIO.hpp
+    src/CoinFinite.hpp
+    src/CoinFloatEqual.hpp
+    src/CoinHelperFunctions.hpp
+    src/CoinIndexedVector.hpp
+    src/CoinLpIO.hpp
+    src/CoinMessageHandler.hpp
+    src/CoinMessage.hpp
+    src/CoinModel.hpp
+    src/CoinModelUseful.hpp
+    src/CoinMpsIO.hpp
+    src/CoinNodeHeap.hpp
+    src/CoinOddWheelSeparator.hpp
+    src/CoinOslC.h
+    src/CoinOslFactorization.hpp
+    src/CoinPackedMatrix.hpp
+    src/CoinPackedVectorBase.hpp
+    src/CoinPackedVector.hpp
+    src/CoinParam.hpp
+    src/CoinPragma.hpp
+    src/CoinPresolveDoubleton.hpp
+    src/CoinPresolveDual.hpp
+    src/CoinPresolveDupcol.hpp
+    src/CoinPresolveEmpty.hpp
+    src/CoinPresolveFixed.hpp
+    src/CoinPresolveForcing.hpp
+    src/CoinPresolveImpliedFree.hpp
+    src/CoinPresolveIsolated.hpp
+    src/CoinPresolveMatrix.hpp
+    src/CoinPresolveMonitor.hpp
+    src/CoinPresolvePsdebug.hpp
+    src/CoinPresolveSingleton.hpp
+    src/CoinPresolveSubst.hpp
+    src/CoinPresolveTighten.hpp
+    src/CoinPresolveTripleton.hpp
+    src/CoinPresolveUseless.hpp
+    src/CoinPresolveZeros.hpp
+    src/CoinRational.hpp
+    src/CoinSearchTree.hpp
+    src/CoinShallowPackedVector.hpp
+    src/CoinShortestPath.hpp
+    src/CoinSignal.hpp
+    src/CoinSimpFactorization.hpp
+    src/CoinSmartPtr.hpp
+    src/CoinSnapshot.hpp
+    src/CoinSort.hpp
+    src/CoinStaticConflictGraph.hpp
+    src/CoinStructuredModel.hpp
+    src/CoinTime.hpp
+    src/CoinTypes.h
+    src/CoinUtility.hpp
+    src/CoinUtilsConfig.h
+    src/CoinWarmStartBasis.hpp
+    src/CoinWarmStartDual.hpp
+    src/CoinWarmStart.hpp
+    src/CoinWarmStartPrimalDual.hpp
+    src/CoinWarmStartVector.hpp
+    # Note that the following 3 files are excluded from installable headers on Osi and Clp because
+    # all 3 projects install to the same include directory and we want CoinUtils versions of the
+    # headers to take precedence
+    src/configall_system.h
+    src/configall_system_msc.h
+    src/config_default.h
+
+    src/config_coinutils_default.h
+)
 
 add_library(${PROJECT_NAME} ${UTILS_SOURCES})
 
@@ -70,11 +220,7 @@ if(MSVC)
 endif()
 target_compile_definitions(${PROJECT_NAME} PRIVATE HAVE_CMATH HAVE_CFLOAT)
 
-install(DIRECTORY src/
-        DESTINATION ${INSTALL_INCLUDE_DIR}
-        FILES_MATCHING
-        PATTERN "*.h"
-        PATTERN "*.hpp")
+install(FILES ${UTILS_HEADERS} DESTINATION ${INSTALL_INCLUDE_DIR})
 
 install(TARGETS ${PROJECT_NAME}
         EXPORT "${PROJECT_NAME}Targets"
