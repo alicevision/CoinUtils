@@ -33,19 +33,9 @@ set(PROJECT_VERSION_PATCH 14)
 
 set(CMAKE_CXX_STANDARD 14)
 
-set(INSTALL_BIN_DIR      "bin"                      CACHE PATH "Path where exe and dll will be installed")
-set(INSTALL_LIB_DIR      "lib"                      CACHE PATH "Path where lib will be installed")
-set(INSTALL_INCLUDE_DIR  "include/Coin"             CACHE PATH "Path where headers will be installed")
-set(INSTALL_CMAKE_DIR    "share/coinutils"          CACHE PATH "Path where cmake configs will be installed")
-
-# Make relative paths absolute (needed later on)
-set(RELATIVE_INSTALL_INCLUDE_DIR ${INSTALL_INCLUDE_DIR})
-foreach(p LIB BIN INCLUDE CMAKE)
-  set(var INSTALL_${p}_DIR)
-  if(NOT IS_ABSOLUTE "${${var}}")
-    set(${var} "${CMAKE_INSTALL_PREFIX}/${${var}}")
-  endif()
-endforeach()
+include(GNUInstallDirs)
+set(INSTALL_INCLUDE_DIR ${CMAKE_INSTALL_INCLUDEDIR}/Coin)
+set(INSTALL_CMAKE_DIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
 
 if(MSVC)
   set(
@@ -78,7 +68,7 @@ file(GLOB UTILS_SOURCES
 
 add_library(${PROJECT_NAME} ${UTILS_SOURCES})
 
-target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${RELATIVE_INSTALL_INCLUDE_DIR}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${INSTALL_INCLUDE_DIR}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
 
 if(MSVC)
   target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
