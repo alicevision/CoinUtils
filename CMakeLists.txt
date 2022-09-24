@@ -72,20 +72,20 @@ if(NOT HAVE_CMATH OR NOT HAVE_CFLOAT)
 endif()
 
 file(GLOB UTILS_SOURCES
-          CoinUtils/src/*.hpp
-          CoinUtils/src/*.cpp
-          CoinUtils/src/*.h)
+          src/*.hpp
+          src/*.cpp
+          src/*.h)
 
 add_library(${PROJECT_NAME} ${UTILS_SOURCES})
 
-target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${RELATIVE_INSTALL_INCLUDE_DIR}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/CoinUtils/src>)
+target_include_directories(${PROJECT_NAME} PUBLIC $<INSTALL_INTERFACE:${RELATIVE_INSTALL_INCLUDE_DIR}> $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/src>)
 
 if(MSVC)
   target_compile_definitions(${PROJECT_NAME} PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 target_compile_definitions(${PROJECT_NAME} PRIVATE HAVE_CMATH HAVE_CFLOAT)
 
-install(DIRECTORY CoinUtils/src/
+install(DIRECTORY src/
         DESTINATION ${INSTALL_INCLUDE_DIR}
         FILES_MATCHING
         PATTERN "*.h"
